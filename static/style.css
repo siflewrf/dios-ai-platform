@@ -1,0 +1,323 @@
+/* DIOS - Decision Intelligence Operating System */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: #0f172a;
+    color: #e5e7eb;
+    line-height: 1.6;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    height: 100vh;
+    gap: 1px;
+    background: #1f2937;
+}
+
+.panel {
+    padding: 24px;
+    overflow-y: auto;
+    background: #0f172a;
+}
+
+.panel.left {
+    border-right: 1px solid #1f2937;
+}
+
+.panel.center {
+    border-right: 1px solid #1f2937;
+    background: #0b1220;
+}
+
+.panel.right {
+    background: #111827;
+}
+
+/* Panel Headers */
+.panel-header {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #1f2937;
+}
+
+.panel-header h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #f3f4f6;
+}
+
+/* Forms */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-field label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #1f2937;
+    border-radius: 6px;
+    background: #1f2937;
+    color: #e5e7eb;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    resize: vertical;
+    min-height: 100px;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    background: #111827;
+}
+
+/* Buttons */
+.btn-primary {
+    padding: 12px 16px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-primary:hover {
+    background: #1d4ed8;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.btn-primary:active {
+    background: #1e40af;
+}
+
+/* Decision Cards */
+.decision-card {
+    background: #1f2937;
+    border-radius: 8px;
+    padding: 20px;
+    border: 1px solid #374151;
+}
+
+.error-card {
+    background: #7f1d1d;
+    border-left: 4px solid #ef4444;
+    padding: 16px;
+    border-radius: 6px;
+    color: #fecaca;
+    margin-bottom: 16px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #6b7280;
+}
+
+/* Decision Sections */
+.decision-section {
+    margin-bottom: 24px;
+}
+
+.decision-section h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2563eb;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.problem-text,
+.fallback-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #e5e7eb;
+}
+
+.decision-text {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #f3f4f6;
+    padding: 12px;
+    background: #111827;
+    border-left: 3px solid #10b981;
+    border-radius: 4px;
+}
+
+/* Lists */
+.steps-list,
+.risks-list {
+    margin-left: 20px;
+    color: #d1d5db;
+}
+
+.steps-list li,
+.risks-list li {
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+/* Metadata */
+.metadata-bar {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #374151;
+}
+
+.badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.badge.confidence {
+    background: #1f2937;
+    color: #60a5fa;
+}
+
+.badge.confidence[data-confidence="80"],
+.badge.confidence[data-confidence="90"],
+.badge.confidence[data-confidence="100"] {
+    background: #064e3b;
+    color: #a7f3d0;
+}
+
+.badge.id {
+    background: #1f2937;
+    color: #a78bfa;
+}
+
+/* Status Panel */
+.status-group {
+    background: #1f2937;
+    border-radius: 6px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    font-size: 13px;
+    color: #d1d5db;
+}
+
+.status-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #6b7280;
+}
+
+.status-indicator.active {
+    background: #10b981;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Info Boxes */
+.info-box {
+    background: #1f2937;
+    border-radius: 6px;
+    padding: 16px;
+    margin-bottom: 16px;
+    border-left: 3px solid #2563eb;
+}
+
+.info-box h4 {
+    font-size: 12px;
+    font-weight: 600;
+    color: #2563eb;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+}
+
+.info-box p {
+    font-size: 12px;
+    color: #9ca3af;
+    margin-bottom: 6px;
+}
+
+.info-box code {
+    display: inline-block;
+    background: #111827;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: #60a5fa;
+}
+
+/* Scrollbar */
+.panel::-webkit-scrollbar {
+    width: 6px;
+}
+
+.panel::-webkit-scrollbar-track {
+    background: #1f2937;
+}
+
+.panel::-webkit-scrollbar-thumb {
+    background: #374151;
+    border-radius: 3px;
+}
+
+.panel::-webkit-scrollbar-thumb:hover {
+    background: #4b5563;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .container {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    
+    .panel {
+        border-right: none;
+        border-bottom: 1px solid #1f2937;
+    }
+}

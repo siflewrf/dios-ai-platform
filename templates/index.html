@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIOS - Decision Intelligence Operating System</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- LEFT PANEL: INPUT -->
+    <div class="panel left">
+        <div class="panel-header">
+            <h2>⚙️ Input</h2>
+        </div>
+        
+        <form method="POST" class="form-group">
+            <div class="form-field">
+                <label>Operational Situation</label>
+                <textarea 
+                    name="situation" 
+                    placeholder="Describe the operational situation that requires a decision..."
+                    required
+                ></textarea>
+            </div>
+            
+            <div class="form-field">
+                <label>SOP / Company Rules (Optional)</label>
+                <textarea 
+                    name="sop" 
+                    placeholder="Any relevant standard operating procedures or constraints..."
+                ></textarea>
+            </div>
+            
+            <button type="submit" class="btn-primary">Generate Decision</button>
+        </form>
+    </div>
+
+    <!-- CENTER PANEL: OUTPUT -->
+    <div class="panel center">
+        <div class="panel-header">
+            <h2>📋 Decision Output</h2>
+        </div>
+        
+        {% if error %}
+        <div class="error-card">
+            <strong>⚠️ Error:</strong> {{ error }}
+        </div>
+        {% endif %}
+        
+        {% if result %}
+        <div class="decision-card">
+            
+            <!-- Core Problem -->
+            <div class="decision-section">
+                <h3>1. Core Problem</h3>
+                <p class="problem-text">{{ result.core_problem }}</p>
+            </div>
+            
+            <!-- Decision -->
+            <div class="decision-section">
+                <h3>2. Required Decision</h3>
+                <p class="decision-text"><strong>{{ result.decision }}</strong></p>
+            </div>
+            
+            <!-- Execution Steps -->
+            {% if result.steps %}
+            <div class="decision-section">
+                <h3>3. Execution Steps</h3>
+                <ol class="steps-list">
+                    {% for step in result.steps %}
+                    <li>{{ step }}</li>
+                    {% endfor %}
+                </ol>
+            </div>
+            {% endif %}
+            
+            <!-- Risks -->
+            {% if result.risks %}
+            <div class="decision-section">
+                <h3>4. Risks & Impact</h3>
+                <ul class="risks-list">
+                    {% for risk in result.risks %}
+                    <li>{{ risk }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            
+            <!-- Fallback -->
+            {% if result.fallback %}
+            <div class="decision-section">
+                <h3>5. Fallback Strategy</h3>
+                <p class="fallback-text">{{ result.fallback }}</p>
+            </div>
+            {% endif %}
+            
+            <!-- Metadata -->
+            <div class="metadata-bar">
+                <span class="badge confidence" data-confidence="{{ result.confidence }}">
+                    📊 {{ result.confidence }}% Confidence
+                </span>
+                {% if decision_id %}
+                <span class="badge id">
+                    🔖 ID: {{ decision_id }}
+                </span>
+                {% endif %}
+            </div>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <p>No decision yet.</p>
+            <p style="font-size: 12px; color: #666;">Fill in the situation and click "Generate Decision"</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- RIGHT PANEL: STATUS -->
+    <div class="panel right">
+        <div class="panel-header">
+            <h2>🟢 Status</h2>
+        </div>
+        
+        <div class="status-group">
+            <div class="status-item">
+                <span class="status-indicator active"></span>
+                <span>DIOS Active</span>
+            </div>
+            <div class="status-item">
+                <span class="status-indicator active"></span>
+                <span>Decision Engine</span>
+            </div>
+            <div class="status-item">
+                <span class="status-indicator active"></span>
+                <span>Learning Ready</span>
+            </div>
+        </div>
+        
+        <div class="info-box">
+            <h4>System Info</h4>
+            <p><strong>Purpose:</strong> Enterprise decision automation</p>
+            <p><strong>Model:</strong> OpenRouter (gpt-4o-mini)</p>
+            <p><strong>Storage:</strong> SQLite</p>
+        </div>
+        
+        <div class="info-box">
+            <h4>API Endpoints</h4>
+            <code>/api/decision</code> - Create decision<br>
+            <code>/api/history</code> - Get history<br>
+            <code>/api/stats</code> - Get statistics
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
